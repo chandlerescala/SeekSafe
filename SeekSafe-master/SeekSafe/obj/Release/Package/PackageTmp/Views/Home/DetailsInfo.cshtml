@@ -1,0 +1,274 @@
+﻿@model SeekSafe.UserInfo
+
+@{
+    Layout = "~/Views/Shared/_OllieHomeLayout.cshtml";
+    ViewBag.Title = "DetailsInfo";
+}
+<header id="home" class="header">
+    <div class="overlay"></div>
+    <div id="header-carousel" class="carousel slide carousel-fade" data-ride="carousel">
+        <div class="container">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="carousel-caption d-none d-md-block">
+                        <div class="container-fluid_b"  style="max-height: 550px; overflow-y: auto;">
+                            <h2>Detailed Information</h2>
+
+                            <div>
+                                <h4>User Information</h4>
+                                @if (!String.IsNullOrEmpty(TempData["Msg"] as String))
+                                {
+                                    <div class="alert alert-success">@TempData["Msg"]</div>
+                                }
+                                <hr />
+                                <dl class="dl-horizontal">
+                                    <dt>
+                                        ID Number :
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.userIDNum)
+                                    </dd>
+
+                                    <dt>
+                                        First Name :
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.firstName)
+                                    </dd>
+
+                                    <dt>
+                                        Last Name :
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.lastName)
+                                    </dd>
+
+                                    <dt>
+                                        Department :
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Department.departmentName)
+                                    </dd>
+
+                                    <dt>
+                                        Contact Number :
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.contactNo)
+                                    </dd>
+
+                                    <dt>
+                                        Email :
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.email)
+                                    </dd>
+
+                                    <dt>
+                                        Registration Date :
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.registrationDate)
+                                    </dd>
+
+                                </dl>
+                            </div>
+                            <p>
+                                @*<a href="@Url.Action("EditInfo", new { id = Model.userID })" class="btn-here">Edit</a>*@
+                                <a href="@Url.Action("EditInfo", new { id = Model.userID })" class="btn1 btn-primary col-12" style="border-radius: 20px; flex: 1; text-align: center; font-weight: bold">Edit</a>
+                                <a href="@Url.Action("ManageUserInfo")" class="btn-colorful">Back</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container_foot_m">
+    <footer class="footer mt-5 border-top">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-6 text-center text-md-left">
+                <p class="mb-0">
+                    Copyright
+                    <script>document.write(new Date().getFullYear())</script> &copy;
+                    <a target="_blank" href="https://www.facebook.com/mark.julianiii">Bongola MJ,</a>
+                    <a target="_blank" href="https://www.facebook.com/chandlerescala"> Escala CA,</a>
+                    <a target="_blank" href="https://www.facebook.com/mistyrhaine.escala/"> Escala MR,</a>
+                    <a target="_blank" href="https://www.facebook.com/jessarosetepace.24"> Tepace JR</a>
+                </p>
+            </div>
+            <div class="col-md-6 text-center text-md-right">
+                <div class="social-links">
+                    <a href="javascript:void(0)" class="link"><i class="ti-facebook"></i></a>
+                    <a href="https://google.com/seeksafe19" class="link"><i class="ti-google"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<style>
+    .container_foot_m {
+        margin-top: 10px;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        padding: 0 20px; /* Adjust left and right padding for centering */
+    }
+
+    body {
+        margin-top: 0;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        background-color: rgb(237, 242, 250);
+    }
+
+    .bg-light1 {
+        background-image: linear-gradient(135deg, #fdfcfb 10%, #e2d1c3 100%);
+    }
+
+    .custom-bg-color {
+        background-image: linear-gradient(135deg, #6B0F1A 100%, #6B0F1A 10%);
+    }
+
+    .dropdown-menu[data-bs-popper] {
+        left: auto;
+    }
+
+    .report-form-container {
+        width: 100%;
+        max-width: 500px;
+        margin: 100px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 255, 0.3);
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 2px solid #052659;
+        border-radius: 5px;
+        background-color: transparent;
+        color: #000000;
+    }
+
+    .form-container {
+        width: 100%;
+        max-width: 500px;
+        margin: 100px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 255, 0.3);
+    }
+
+        /* Form Fields */
+        .form-container label {
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .form-container textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #CCCCCC;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        .form-container input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .form-container button[type="submit"] {
+            background-color: #004080;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .form-container textarea:focus {
+            border-color: #004080;
+        }
+
+        .form-container input[type="radio"]:focus {
+            outline-color: #004080;
+        }
+
+        .form-container button[type="submit"]:focus {
+            outline-color: #004080;
+        }
+
+    .dropdown-toggle1 {
+        background-color: #808080;
+    }
+
+    .dropdown-toggle {
+        color: #fff;
+        border-color: #004080;
+    }
+
+    .text-dark {
+        color: #fff !important;
+    }
+
+    .bg-light {
+        background-color: #ff0000 !important;
+    }
+
+    .my-3 {
+        margin-top: 4rem !important;
+    }
+
+    .modal-header {
+        background-image: linear-gradient(135deg, #6B0F1A 100%, #6B0F1A 10%);
+    }
+
+    .form-check-input:checked {
+        background-color: #6b0f1a !important;
+        border-color: #dc3545 !important;
+    }
+
+    .modal-footer {
+        background-color: rgb(237, 242, 250);
+    }
+
+    /* Button styles */
+    .btn-colorful {
+        display: inline-block;
+        width: 5%;
+        padding: 10px;
+        margin: 10px 0;
+        border: none;
+        border-radius: 5px;
+        background-color: #008080;
+        color: #fff;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        /* Hover state */
+        .btn-colorful:hover {
+            background-color: #66b2b2;
+            color: #021024; /* Dark text color on hover */
+        }
+</style>
+

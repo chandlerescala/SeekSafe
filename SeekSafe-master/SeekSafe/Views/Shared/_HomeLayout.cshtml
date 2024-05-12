@@ -1,0 +1,295 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- Title and Custom CSS -->
+    <title>@ViewBag.Title - Test</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+
+    <!-- Modernizr JavaScript -->
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            margin-top: 0;
+            padding-top: 0px;
+            padding-bottom: 0px;
+            background-color: rgb(237, 242, 250);
+        }
+
+        .bg-light1 {
+            background-image: linear-gradient(135deg, #fdfcfb 10%, #e2d1c3 100%);
+        }
+
+        .custom-bg-color {
+            background-image: linear-gradient(135deg, #6B0F1A 100%, #6B0F1A 10%);
+        }
+            
+
+        h1 {
+            color: black;
+        }
+
+        p {
+            color: black;
+        }
+
+        .dropdown-menu[data-bs-popper]
+        {
+           left: auto;
+        }
+
+        .report-form-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 255, 0.3);
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #052659;
+            border-radius: 5px;
+            background-color: transparent;
+            color: #000000;
+        }
+
+        /* Login button */
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background-color: #7DA0CA;
+            color: #021024;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+            input[type="submit"]:hover {
+                background-color: #C1E8FF;
+                color: #021024;
+            }
+
+        .form-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 255, 0.3);
+        }
+
+            /* Form Fields */
+            .form-container label {
+                display: block;
+                margin-bottom: 20px;
+            }
+
+            .form-container textarea {
+                width: 100%;
+                padding: 8px;
+                border: 1px solid #CCCCCC;
+                border-radius: 4px;
+                resize: vertical;
+            }
+
+            .form-container input[type="radio"] {
+                margin-right: 10px;
+            }
+
+            .form-container button[type="submit"] {
+                background-color: #004080;
+                color: #FFFFFF;
+                border: none;
+                border-radius: 4px;
+                padding: 10px 20px;
+                cursor: pointer;
+            }
+
+            .form-container textarea:focus {
+                border-color: #004080;
+            }
+
+            .form-container input[type="radio"]:focus {
+                outline-color: #004080;
+            }
+
+            .form-container button[type="submit"]:focus {
+                outline-color: #004080;
+            }
+
+        .btn-primary {
+            color: #fff;
+            background-color: #FFA500;
+            border-color: #FFA500;
+        }
+
+        .btn-secondary {
+            color: #fff;
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+        }
+
+        .dropdown-toggle1 {
+            background-color: #808080;
+        }
+
+        .dropdown-toggle {
+            color: #fff;           
+            border-color: #004080;
+        }
+
+        .text-dark {
+            color: #fff !important;
+        }
+
+        .bg-light {
+            background-color: #ff0000 !important;
+        }
+
+        .my-3{
+            margin-top: 4rem!important;
+        }
+
+        .modal-header{
+            background-image: linear-gradient(135deg, #6B0F1A 100%, #6B0F1A 10%);
+        }
+
+        .form-check-input:checked {
+            background-color: #6b0f1a !important;
+            border-color: #dc3545 !important;
+        }
+
+        .modal-footer{
+            background-color: rgb(237, 242, 250);
+        }
+
+        .btn-here {
+            display: inline-block;
+            width: 5%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background-color: #a70000; 
+            color: #fff;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn-here:hover {
+            background-color: #fd5e5e;
+            color: #021024;
+        }
+
+        /* Button styles */
+        .btn-colorful {
+            display: inline-block;
+            width: 5%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background-color: #008080; 
+            color: #fff;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Hover state */
+        .btn-colorful:hover {
+            background-color: #66b2b2; 
+            color: #021024; /* Dark text color on hover */
+        }
+    </style>
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark custom-bg-color fixed-top">
+        <div class="container-fluid">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a class="navbar-brand" href="#">
+                    <img src="logo.png" alt="Logo" style="width:40px;" class="rounded-pill">
+                </a>                 
+                <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                    <ul class="navbar-nav">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item"><a href="~/Home/MyReports" class="nav-link text-white">My Reports</a></li>
+                                <li class="nav-item"><a href="~/Home/FoundItems" class="nav-link text-white">Reported Items</a></li>
+                                <li class="nav-item"><a href="~/Home/ClaimedReports" class="nav-link text-white">Claimed Items</a></li>
+                                <li class="nav-item"><a href="~/Home/PendingReports" class="nav-link text-white">Manage Reports
+                                    <span class="badge bg-light text-dark rounded-pill align-text-bottom">
+                                        @ViewBag.NotificationCount
+                                    </span></a></li>
+                                <li class="nav-item"><a href="~/Home/ManageUsers" class="nav-link text-white">Manage Users</a></li>
+                                <li class="nav-item"><a href="~/Home/Notifications" class="nav-link text-white">Notifications<span class="badge bg-light text-dark rounded-pill align-text-bottom">27</span></a></li>
+                            }
+                            else if (User.IsInRole("User"))
+                            {
+                                <li class="nav-item"><a href="~/Home/MyReports" class="nav-link text-white">MyReports</a></li>
+                                <li class="nav-item"><a href="~/Home/FoundItems" class="nav-link text-white">Found Items</a></li>
+                                <li class="nav-item"><a href="~/Home/ClaimedReports" class="nav-link text-white">Claimed Items</a></li>
+                                @*<li class="nav-item"><a href="~/Home/Notifications" class="nav-link text-white">Notifications<span class="badge bg-light text-dark rounded-pill align-text-bottom">27</span></a></li>*@
+                            }
+                        }
+                        else
+                        {
+                            <li class="nav-item"><a href="#" class="nav-link text-white">Home</a></li>
+                            <li class="nav-item"><a href="#" class="nav-link text-white">Features</a></li>
+                            <li class="nav-item"><a href="#" class="nav-link text-white">Pricing</a></li>
+                            <li class="nav-item"><a href="#" class="nav-link text-white">About</a></li>
+                        }
+                    </ul>
+                </div>
+                </div>
+                
+
+                <div class="d-flex">
+                    <a href="#" class="nav-link text-white">@User.Identity.Name</a>
+                    <a href="#" class="nav-link text-white dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="~/Content/Placeholder/noimage.png" alt="profile" width="32" height="32" class="rounded-circle">
+                    </a>
+                    <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="position: absolute;" data-popper-placement="bottom-end">
+                        <li><a class="dropdown-item" href="~/Home/MyProfile">Profile</a></li>
+                        <li><a class="dropdown-item" href="#">Analytics</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="~/Home/Logout">Logout</a></li>
+                    </ul>
+                </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                </div>
+            </nav>
+
+        @RenderBody()
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

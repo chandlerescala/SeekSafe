@@ -1,0 +1,102 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewBag.Title = "NotFound";
+}
+
+<section class="page_404">
+    <div class="container-fluid_h">
+        <div class="row justify-content-center"> <!-- Center the content horizontally -->
+            <div class="col-sm-10 col-md-8 col-lg-6 text-center">
+                <div class="four_zero_four_bg">
+                    <h1 class="text-center">404</h1>
+                    <br />
+                </div>
+                <div class="contant_box_404">
+                    <h3 class="h2">
+                        Looks like you're lost
+                    </h3>
+                    <p>The page you are looking for is not available!</p>
+                    @*<a href="@Url.Action("Index")" class="btn btn-red">Go to Home</a>*@
+                    <a href="#" onclick="goBack()" class="btn btn-red">Go Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+        function goBack() {
+            window.history.back();
+        }
+</script>
+
+<style>
+    /*======================
+        404 page
+    =======================*/
+    .container-fluid_h {
+            width: 100% !important;
+            max-width: 500px !important; 
+            margin: 44px auto !important; 
+            padding: 20px !important;
+            background-color: #fff !important; 
+            border-radius: 8px !important;
+            box-shadow: 0 0 10px rgba(0, 0, 255, 0.3) !important; 
+        }
+
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden; /* Disable scrolling */
+        background-color: black; /* Set overall page background to black */
+    }
+
+    body {
+        position: fixed; /* Fix the body position */
+        width: 100%;
+    }
+
+    .page_404 {
+        padding: 40px 0;
+        background: #fff;
+        font-family: 'Arvo', serif;
+        text-align: center;
+        background-color: #000; /* Set overall page background to black */
+    }
+
+    .text-center {
+        font-family: 'Arvo', serif;
+    }
+
+    .page_404 img {
+        width: 100%;
+    }
+
+    .four_zero_four_bg {
+        background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
+        height: 400px;
+        background-position: center;
+    }
+
+        .four_zero_four_bg h1 {
+            font-size: 80px;
+        }
+
+        .four_zero_four_bg h3 {
+            font-size: 80px;
+        }
+
+    .link_404 {
+        color: #fff !important;
+        padding: 10px 20px;
+        background: #39ac31;
+        margin: 20px 0;
+        display: inline-block;
+    }
+
+    .contant_box_404 {
+        margin-top: -50px;
+    }
+</style>

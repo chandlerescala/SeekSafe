@@ -1,0 +1,106 @@
+﻿@model SeekSafe.UserAccount
+@{
+    //Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    Layout = "~/Views/Shared/_OllieLoginLayout.cshtml";
+    ViewBag.Title = "Login";
+}
+<header id="home" class="header">
+    <div class="overlay"></div>
+    <div id="header-carousel" class="carousel slide carousel-fade" data-ride="carousel">
+        <div class="container">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="carousel-caption d-none d-md-block">
+                        <div class="container-fluid_a">
+                            <br />
+                            <h2 align="center">SeekSafe</h2>
+                            <h4 align="center">Have an Account?</h4>
+                            <hr />
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <br />
+                                <div class="form-group">
+                                    Username
+                                    <div>
+                                        @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control", @required = true } })
+                                        @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    Password
+                                    <div>
+                                        @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control", @type = "password", @required = true, @id = "passwordField" } })
+                                        @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                                        <input type="checkbox" id="showPasswordCheckbox">
+                                        <label for="showPasswordCheckbox">Show Password</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="submit" value="Login" class="btn btn-primary" />
+                                    @*@Html.ActionLink("Back", "Index", null, new { @class = "back-home" })*@
+                                    @Html.ActionLink("Forgot Password?", "ForgotPassword", null, new { @class = "forgot-password" })
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<script>
+    // Get references to the password field and show password checkbox
+    const passwordField = document.getElementById("passwordField");
+    const showPasswordCheckbox = document.getElementById("showPasswordCheckbox");
+
+    // Event listener to toggle password visibility
+    showPasswordCheckbox.addEventListener("change", function() {
+        if (this.checked) {
+            // Show password
+            passwordField.type = "text";
+        } else {
+            // Hide password (mask it)
+            passwordField.type = "password";
+        }
+    });
+</script>
+
+<div class="container_foot_h">
+    <footer class="footer mt-5 border-top">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-6 text-center text-md-left">
+                <p class="mb-0">
+                    SeekSafe
+                    <script>document.write(new Date().getFullYear())</script> &copy;
+                    <a target="_blank" href="https://www.facebook.com/mark.julianiii">Bongola MJ,</a>
+                    <a target="_blank" href="https://www.facebook.com/chandlerescala"> Escala CA,</a>
+                    <a target="_blank" href="https://www.facebook.com/mistyrhaine.escala/"> Escala MR,</a>
+                    <a target="_blank" href="https://www.facebook.com/jessarosetepace.24"> Tepace JR</a>
+                </p>
+            </div>
+            <div class="col-md-6 text-center text-md-right">
+                <div class="social-links">
+                    <a href="javascript:void(0)" class="link"><i class="ti-facebook"></i></a>
+                    <a href="https://google.com/seeksafe19" class="link"><i class="ti-google"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<style>
+        .container_foot_h {
+        margin-top: 10px;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        padding: 0 20px; /* Adjust left and right padding for centering */
+    }
+</style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>

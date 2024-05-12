@@ -1,0 +1,330 @@
+﻿@model IEnumerable<vw_VerifiedItems>
+
+@{
+    Layout = "~/Views/Shared/_OllieHomeLayout.cshtml";
+    ViewBag.Title = "Found Items";
+}
+
+<header id="home" class="header">
+    <div class="overlay"></div>
+    <div id="header-carousel" class="carousel slide carousel-fade" data-ride="carousel">
+        <div class="container">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1 class="pb-2 mb-0">Found Items</h1>
+                        <p class="text-start">
+                            <a href="~/Home/FoundItemReport" class="btn btn-danger my-2" style="margin-right: 10px">Report Found Item</a>
+                            <a href="~/Home/MyReports" class="btn btn-warning my-2">Go to My Reports</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="album py-5 bg-light1">
+        <div class="container">
+            @if (!String.IsNullOrEmpty(TempData["FoundReportMsg"] as String))
+            {
+                <div class="alert alert-success">@TempData["FoundReportMsg"]</div>
+            }
+            @if (!String.IsNullOrEmpty(TempData["ClaimReportMsg"] as String))
+            {
+                <div class="alert alert-success">@TempData["ClaimReportMsg"]</div>
+            }
+            <div class="dropdown">
+                <button type="button" class="btn dropdown-toggle1 text-white" data-bs-toggle="dropdown" style="background-color: #008080; color: white; font-weight: bold; ">
+                    Sort by
+                </button>
+
+                <hr />
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="@Url.Action("FoundItems", "Home", new { sortOrder = "newest" })">Newest to Oldest</a></li>
+                    <li><a class="dropdown-item" href="@Url.Action("FoundItems", "Home", new { sortOrder = "oldest" })">Oldest to Newest</a></li>
+                </ul>
+            </div>
+
+            <div class="row row-cols-1 row-cols-md-3 g-3">
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-8 col-lg-4 mb-4">
+                        <div class="card shadow-sm h-100">
+                            @if (!string.IsNullOrEmpty(item.ImageUrl))
+                {
+                                <img src="@item.ImageUrl" class="card-img-top" style="height: 200px;" alt="Image not supported" />
+                            }
+                            @if (string.IsNullOrEmpty(item.ImageUrl))
+                {
+                                <img src="~/Content/Placeholder/noimage.png" class="card-img-top" style="height: 200px;" alt="No Available Image" />
+                            }
+                            <div class="card-body">
+                                <h3 class="card-title">@item.itemName</h3>
+                                <p class="card-text">Item ID: @item.itemID</p>
+                                <p class="card-text">Description: @item.itemDescription</p>
+                                <p class="card-text">Location Found: @item.locationName</p>
+                                @if (item.date.HasValue)
+                                {
+                                    <p class="text-gray-dark">Date Found: @item.date.Value.ToShortDateString()</p>
+                                }
+                                else
+                                {
+                                    <p class="text-gray-dark">Date Found: (No date available)</p>
+                                }
+
+                                @if (item.time.HasValue)
+                                {
+                                    <p class="text-gray-dark">Time Found: @DateTime.Today.Add(item.time.Value).ToString("hh:mm tt")</p>
+                                }
+                                else
+                                {
+                                    <p class="text-gray-dark">Time Found: (No time available)</p>
+                                }
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn1 btn-secondary" data-bs-toggle="modal" data-bs-target="#myModal_@item.itemID">
+                                            Is this yours?
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal content -->
+                    <div class="modal" id="myModal_@item.itemID" tabindex="-1" role="dialog">
+                        <!-- Modal content goes here -->
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <!-- Modal Header -->
+                                <div class="modal-header text-white">
+                                    <h4 class="modal-title text-whitetext-white">Is this yours?</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <!-- Add your modal body content here -->
+                                    <p>Kindly select "Yes" to proceed with the claiming process.</p>
+                                    <hr />
+                                    <p>Note: This is just the 1st step of the claiming process.</p>
+                                    <a href="~/Home/Guide" class="btn btn-warning my-2">Guidelines</a>
+                                </div>
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <!-- Corrected link using Url.Action -->
+                                    <a href="@Url.Action("ClaimItemReport", "Home", new { itemId = item.itemID })" class="btn btn-danger">Yes</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+</main>
+
+@*<div class="modal" id="myModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header text-white">
+                <h4 class="modal-title text-whitetext-white">Is this yours?</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <!-- Add your modal body content here -->    
+                <p>Make sure you submitted the lost item report to proceed to 2nd step. </p>
+                <p>Kindly select "Yes" to proceed with the claiming process.</p>
+                <hr />
+                <p>Note: This is just the 1st step of claiming process.</p>
+                <a href="~/Home/Guides" class="btn btn-warning my-2">Guidelines</a>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <a href="~/Home/ClaimItemReport" class="btn btn-danger">Yes</a>
+            </div>
+        </div>
+    </div>
+</div>*@
+
+<div class="container_foot_m">
+    <footer class="footer mt-5 border-top">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-6 text-center text-md-left">
+                <p class="mb-0">
+                    SeekSafe
+                    <script>document.write(new Date().getFullYear())</script> &copy;
+                    <a target="_blank" href="https://www.facebook.com/mark.julianiii">Bongola MJ,</a>
+                    <a target="_blank" href="https://www.facebook.com/chandlerescala"> Escala CA,</a>
+                    <a target="_blank" href="https://www.facebook.com/mistyrhaine.escala/"> Escala MR,</a>
+                    <a target="_blank" href="https://www.facebook.com/jessarosetepace.24"> Tepace JR</a>
+                </p>
+            </div>
+            <div class="col-md-6 text-center text-md-right">
+                <div class="social-links">
+                    <a href="javascript:void(0)" class="link"><i class="ti-facebook"></i></a>
+                    <a href="https://google.com/seeksafe19" class="link"><i class="ti-google"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+<style>
+    .container_foot_m {
+        margin-top: 50px;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        padding: 0 20px; /* Adjust left and right padding for centering */
+    }
+
+    body {
+        margin-top: 0;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        background-color: rgb(237, 242, 250);
+    }
+
+    .bg-light1 {
+        background-image: linear-gradient(135deg, #fdfcfb 10%, #e2d1c3 100%);
+    }
+
+    .custom-bg-color {
+        background-image: linear-gradient(135deg, #6B0F1A 100%, #6B0F1A 10%);
+    }
+
+    .dropdown-menu[data-bs-popper] {
+        left: auto;
+    }
+
+    .report-form-container {
+        width: 100%;
+        max-width: 500px;
+        margin: 100px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 255, 0.3);
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 2px solid #052659;
+        border-radius: 5px;
+        background-color: transparent;
+        color: #000000;
+    }
+
+    .form-container {
+        width: 100%;
+        max-width: 500px;
+        margin: 100px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 255, 0.3);
+    }
+
+        /* Form Fields */
+        .form-container label {
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .form-container textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #CCCCCC;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        .form-container input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .form-container button[type="submit"] {
+            background-color: #004080;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .form-container textarea:focus {
+            border-color: #004080;
+        }
+
+        .form-container input[type="radio"]:focus {
+            outline-color: #004080;
+        }
+
+        .form-container button[type="submit"]:focus {
+            outline-color: #004080;
+        }
+
+    .dropdown-toggle1 {
+        background-color: #808080;
+    }
+
+    .dropdown-toggle {
+        color: #fff;
+        border-color: #004080;
+    }
+
+    .text-dark {
+        color: #fff !important;
+    }
+
+    .bg-light {
+        background-color: #ff0000 !important;
+    }
+
+    .my-3 {
+        margin-top: 4rem !important;
+    }
+
+    .modal-header {
+        background-image: linear-gradient(135deg, #6B0F1A 100%, #6B0F1A 10%);
+    }
+
+    .form-check-input:checked {
+        background-color: #6b0f1a !important;
+        border-color: #dc3545 !important;
+    }
+
+    .modal-footer {
+        background-color: rgb(237, 242, 250);
+    }
+
+    /* Button styles */
+    .btn-colorful {
+        display: inline-block;
+        width: 5%;
+        padding: 10px;
+        margin: 10px 0;
+        border: none;
+        border-radius: 5px;
+        background-color: #008080;
+        color: #fff;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        /* Hover state */
+        .btn-colorful:hover {
+            background-color: #66b2b2;
+            color: #021024; /* Dark text color on hover */
+        }
+</style>

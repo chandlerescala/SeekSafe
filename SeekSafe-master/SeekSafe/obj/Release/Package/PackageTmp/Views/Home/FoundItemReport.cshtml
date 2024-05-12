@@ -1,0 +1,323 @@
+﻿@model SeekSafe.Item
+@{
+    Layout = "~/Views/Shared/_OllieHomeLayout.cshtml";
+    ViewBag.Title = "Found Item Report";
+}
+<header id="home" class="header">
+    <div class="overlay"></div>
+    <div id="header-carousel" class="carousel slide carousel-fade" data-ride="carousel">
+        <div class="container">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="carousel-caption d-none d-md-block">
+                        <div class="container-fluid_b" style="max-height: 550px; overflow-y: auto;">
+                            <br />
+                            <h2 align="center">Report Found Item</h2>
+                            <hr />
+                            <div class="form-horizontal">
+                                @using (Html.BeginForm("FoundItemReport", "Home", FormMethod.Post, new { enctype = "multipart/form-data", id = "FoundItemReportForm" }))
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                    <input type="hidden" name="userIdNum" value="@ViewBag.UserIdNum" />
+
+                                    <div class="form-group">
+                                        Report for
+                                        @Html.DropDownListFor(model => model.itemStatus, new SelectList(new[]
+                                         {
+                                            new SelectListItem { Text = "Found Item", Value = "Found Item", Selected = true, Disabled = true },
+                                         }, "Value", "Text"), new { @class = "form-control", @required = true, disabled = "disabled" })
+                                        @Html.ValidationMessageFor(model => model.itemStatus, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="form-group">
+                                        Item Name
+                                        <div>
+                                            @Html.EditorFor(model => model.itemName, new { htmlAttributes = new { @class = "form-control", placeholder = "Ex. Cellphone", @required = true } })
+                                            @Html.ValidationMessageFor(model => model.itemName, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        Description
+                                        <div>
+                                            @Html.TextAreaFor(model => model.itemDescription, new { @class = "form-control", placeholder = "Ex. I found a black iPhone 12 with a cracked screen. The phone has a black case with a sticker on the back.", @required = "required", rows = "2", cols = "50" })
+                                            @Html.ValidationMessageFor(model => model.itemDescription, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        Location
+                                        <div>
+                                            @Html.EditorFor(model => model.locationName, new { htmlAttributes = new { @class = "form-control", placeholder = "Ex. School Canteen", @required = true } })
+                                            @Html.ValidationMessageFor(model => model.locationName, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        Date Found
+                                        <div>
+                                            @Html.EditorFor(model => model.date, "{0:yyyy-MM-dd}", new { htmlAttributes = new { @class = "form-control", @type = "date", @required = true } })
+                                            @Html.ValidationMessageFor(model => model.date, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="timeFound">Time Found</label>
+                                        <div>
+                                            @Html.EditorFor(model => model.time, new { htmlAttributes = new { @class = "form-control", @type = "time", @required = true } })
+                                        </div>
+                                    </div>
+
+                                        <div class="form-group">
+                                            Item Type
+                                            @Html.DropDownListFor(model => model.itemType, new SelectList(new[]
+                                            {
+                                                new SelectListItem { Text = "Electronic devices (e.g., smartphones, laptops, tablets)", Value = "1" },
+                                                new SelectListItem { Text = "Clothing (e.g., jackets, hats, shoes)", Value = "2" },
+                                                new SelectListItem { Text = "Jewelry (e.g., necklaces, rings, bracelets)", Value = "3" },
+                                                new SelectListItem { Text = "Books (e.g., textbooks, novels, magazines)", Value = "4" },
+                                                new SelectListItem { Text = "Accessories (e.g., wallets, bags, keys)", Value = "5" },
+                                                new SelectListItem { Text = "Documents (e.g., ID cards, passports, tickets)", Value = "6" },
+                                                new SelectListItem { Text = "Sporting goods (e.g., bicycles, skateboards, sports equipment)", Value = "7" },
+                                                new SelectListItem { Text = "Miscellaneous items (e.g., umbrellas, glasses, toys)", Value = "8" }
+                                            }, "Value", "Text"), "Select", new { @class = "form-control", @required = true })
+                                            @Html.ValidationMessageFor(model => model.itemType, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        <div class="form-group">
+                                            Return Method
+                                            @Html.DropDownListFor(model => model.returnMethod, new SelectList(new[]
+                                            {
+                                                new SelectListItem { Text = "Return item to SAO", Value = "SAO" }
+                                            }, "Value", "Text"), "Select", new { @class = "form-control", @required = true })
+                                            @Html.ValidationMessageFor(model => model.returnMethod, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div>
+                                                Upload Image
+                                                <input type="file" name="file" id="file" class="form-control" />
+                                                @Html.ValidationMessageFor(model => model.ImageUrl, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="submit" value="Submit" class="btn btn-default" />
+                                            <a href="@Url.Action("FoundItems")" class="btn-colorful">Cancel</a>
+                                        </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container_foot_m">
+    <footer class="footer mt-5 border-top">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-6 text-center text-md-left">
+                <p class="mb-0">
+                    Copyright
+                    <script>document.write(new Date().getFullYear())</script> &copy;
+                    <a target="_blank" href="https://www.facebook.com/mark.julianiii">Bongola MJ,</a>
+                    <a target="_blank" href="https://www.facebook.com/chandlerescala"> Escala CA,</a>
+                    <a target="_blank" href="https://www.facebook.com/mistyrhaine.escala/"> Escala MR,</a>
+                    <a target="_blank" href="https://www.facebook.com/jessarosetepace.24"> Tepace JR</a>
+                </p>
+            </div>
+            <div class="col-md-6 text-center text-md-right">
+                <div class="social-links">
+                    <a href="javascript:void(0)" class="link"><i class="ti-facebook"></i></a>
+                    <a href="https://google.com/seeksafe19" class="link"><i class="ti-google"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<style>
+    .container_foot_m {
+        margin-top: 10px;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        padding: 0 20px; /* Adjust left and right padding for centering */
+    }
+
+    body {
+        margin-top: 0;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        background-color: rgb(237, 242, 250);
+    }
+
+    .bg-light1 {
+        background-image: linear-gradient(135deg, #fdfcfb 10%, #e2d1c3 100%);
+    }
+
+    .custom-bg-color {
+        background-image: linear-gradient(135deg, #6B0F1A 100%, #6B0F1A 10%);
+    }
+
+    .dropdown-menu[data-bs-popper] {
+        left: auto;
+    }
+
+    .report-form-container {
+        width: 100%;
+        max-width: 500px;
+        margin: 100px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 255, 0.3);
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 2px solid #052659;
+        border-radius: 5px;
+        background-color: transparent;
+        color: #000000;
+    }
+
+    .form-container {
+        width: 100%;
+        max-width: 500px;
+        margin: 100px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 255, 0.3);
+    }
+
+        /* Form Fields */
+        .form-container label {
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .form-container textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #CCCCCC;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        .form-container input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .form-container button[type="submit"] {
+            background-color: #004080;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .form-container textarea:focus {
+            border-color: #004080;
+        }
+
+        .form-container input[type="radio"]:focus {
+            outline-color: #004080;
+        }
+
+        .form-container button[type="submit"]:focus {
+            outline-color: #004080;
+        }
+
+    .dropdown-toggle1 {
+        background-color: #808080;
+    }
+
+    .dropdown-toggle {
+        color: #fff;
+        border-color: #004080;
+    }
+
+    .text-dark {
+        color: #fff !important;
+    }
+
+    .bg-light {
+        background-color: #ff0000 !important;
+    }
+
+    .my-3 {
+        margin-top: 4rem !important;
+    }
+
+    .modal-header {
+        background-image: linear-gradient(135deg, #6B0F1A 100%, #6B0F1A 10%);
+    }
+
+    .form-check-input:checked {
+        background-color: #6b0f1a !important;
+        border-color: #dc3545 !important;
+    }
+
+    .modal-footer {
+        background-color: rgb(237, 242, 250);
+    }
+
+    /* Button styles */
+    .btn-colorful {
+        display: inline-block;
+        width: 5%;
+        padding: 10px;
+        margin: 10px 0;
+        border: none;
+        border-radius: 5px;
+        background-color: #008080;
+        color: #fff;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        /* Hover state */
+        .btn-colorful:hover {
+            background-color: #66b2b2;
+            color: #021024; /* Dark text color on hover */
+        }
+</style>
+
+<script>
+        $(document).ready(function () {
+            $("#FoundItemReportForm").validate({
+                rules: {
+                    date: {
+                        required: true,
+                        max: new Date().toISOString().split('T')[0] // Restrict to today's date or earlier
+                    }
+                },
+                messages: {
+                    date: {
+                        required: "Please select the date when the item was found.",
+                        max: "Please select a date in the past."
+                    }
+                },
+                submitHandler: function (form) {
+                    form.submit();
+                }
+            });
+        });
+</script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>

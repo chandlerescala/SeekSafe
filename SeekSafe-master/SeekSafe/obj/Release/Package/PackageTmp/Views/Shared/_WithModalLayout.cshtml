@@ -1,0 +1,245 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>@ViewBag.Title - SeekSafe</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+
+    <style>
+        body {
+            margin-top: 0;
+            padding-top: 0px;
+            padding-bottom: 0px;
+        }
+
+        .bg-light1 {
+            background: rgba(0, 0, 255, 0.1) !important;
+        }
+
+
+        .custom-bg-color {
+            background-color: #004080;
+        }
+
+        h1 {
+            color: black;
+        }
+
+        p {
+            color: black;
+        }
+
+        .report-form-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 255, 0.3);
+        }
+
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #052659;
+            border-radius: 5px;
+            background-color: transparent;
+            color: #000000;
+        }
+
+        /* Login button */
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background-color: #7DA0CA;
+            color: #021024;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+            /* Optional: Hover effect for the login button */
+            input[type="submit"]:hover {
+                background-color: #C1E8FF;
+                color: #021024;
+            }
+
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 255, 0.3);
+        }
+
+            /* Form Fields */
+            .form-container label {
+                display: block;
+                margin-bottom: 20px;
+            }
+
+            .form-container textarea {
+                width: 100%;
+                padding: 8px;
+                border: 1px solid #CCCCCC;
+                border-radius: 4px;
+                resize: vertical;
+            }
+
+            .form-container input[type="radio"] {
+                margin-right: 10px;
+            }
+
+            .form-container button[type="submit"] {
+                background-color: #004080;
+                color: #FFFFFF;
+                border: none;
+                border-radius: 4px;
+                padding: 10px 20px;
+                cursor: pointer;
+            }
+
+            .form-container textarea:focus {
+                border-color: #004080;
+            }
+
+            .form-container input[type="radio"]:focus {
+                outline-color: #004080;
+            }
+
+            .form-container button[type="submit"]:focus {
+                outline-color: #004080;
+            }
+
+        .btn-primary {
+            color: #fff;
+            background-color: #FFA500;
+            border-color: #FFA500;
+        }
+
+        .btn-secondary {
+            color: #fff;
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+        }
+
+        .dropdown-toggle {
+            color: #fff;
+            background-color: #004080;
+            border-color: #004080;
+        }
+
+        .text-dark {
+            color: #fff !important;
+        }
+
+        .bg-light {
+            background-color: #ff0000 !important;
+        }
+    </style>
+
+</head>
+
+
+<body>
+    <header class="p-3 custom-bg-color text-white">
+        <div>
+
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+                </a>
+
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        if (User.IsInRole("Admin"))
+                        {
+                            <li><a href="~/Home/Home">Home</a></li>
+                            <li><a href="~/Home/LostItems">Lost Items</a></li>
+                            <li><a href="~/Home/FoundItems">Found Items</a></li>
+                            <li><a href="~/Home/MyReports">My Reports</a></li>
+                            <li><a href="~/Home/Notifications">Notifications<span class="badge bg-light text-dark rounded-pill align-text-bottom">27</span></a></li>
+                            <li><a href="~/Home/ManageUsers">Manage Users</a></li>
+                            <li><a href="#">Manage Items</a></li>
+                            <li><a href="#">Manage Reports</a></li>
+
+                        }
+                        else if (User.IsInRole("User"))
+                        {
+                            <li><a href="~/Home/Home">Home</a></li>
+                            <li><a href="~/Home/LostItems">Lost Items</a></li>
+                            <li><a href="~/Home/FoundItems">Found Items</a></li>
+                            <li><a href="~/Home/MyReports">My Reports</a></li>
+                        }
+
+
+                    }
+                    else
+                    {
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">About</a></li>
+                    }
+                </ul>
+
+
+                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                    <input type="search" class="form-control form-control-dark" placeholder="Search Item..." aria-label="Search">
+                </form>
+
+                <div class="text-end">
+                    <a href="#" class="btn btn-outline-light me-1">@User.Identity.Name</a>
+                </div>
+
+                <div class="dropdown text-end">
+                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="~/Content/Placeholder/noimage.png" alt="profile" width="32" height="32" class="rounded-circle">
+                    </a>
+                    <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li><a class="dropdown-item" href="#">Analytics</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="~/Home/Logout">Logout</a></li>
+                    </ul>
+                </div>
+
+
+
+
+
+
+            </div>
+        </div>
+
+
+    </header>
+
+
+
+
+
+    @RenderBody()
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

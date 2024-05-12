@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SeekSafeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="departmentID" />
+    </Key>
+    <Property Name="departmentID" Nullable="false" Type="Int32" />
+    <Property Name="departmentName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
+    <NavigationProperty Name="UserInfo" Relationship="Self.FK__UserInfo__depart__5441852A" FromRole="Department" ToRole="UserInfo" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" Type="String" />
+    <Property Name="principal_id" Nullable="false" Type="Int32" />
+    <Property Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" MaxLength="Max" FixedLength="false" Type="Binary" />
+  </EntityType>
+  <EntityType Name="UserAccount">
+    <Key>
+      <PropertyRef Name="userID" />
+    </Key>
+    <Property Name="userIDNum" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" Type="String" />
+    <Property Name="username" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+    <Property Name="password" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+    <Property Name="roleID" Type="Int32" />
+    <Property Name="userID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+    <NavigationProperty Name="UserRole" Relationship="Self.FK_UserAccount_UserRole" FromRole="UserAccount" ToRole="UserRole" />
+  </EntityType>
+  <EntityType Name="UserInfo">
+    <Key>
+      <PropertyRef Name="userID" />
+    </Key>
+    <Property Name="userID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+    <Property Name="userIDNum" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" Type="String" />
+    <Property Name="firstName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+    <Property Name="lastName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+    <Property Name="departmentID" Type="Int32" />
+    <Property Name="contactNo" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" Type="String" />
+    <Property Name="email" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
+    <Property Name="registrationDate" Nullable="false" Precision="0" Type="DateTime" />
+    <NavigationProperty Name="Department" Relationship="Self.FK__UserInfo__depart__5441852A" FromRole="UserInfo" ToRole="Department" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="roleID" />
+    </Key>
+    <Property Name="roleID" Nullable="false" Type="Int32" />
+    <Property Name="roleName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+    <NavigationProperty Name="UserAccount" Relationship="Self.FK_UserAccount_UserRole" FromRole="UserRole" ToRole="UserAccount" />
+  </EntityType>
+  <EntityType Name="vw_AllReports">
+    <Key>
+      <PropertyRef Name="itemID" />
+      <PropertyRef Name="username" />
+    </Key>
+    <Property Name="itemID" Nullable="false" Type="Int32" />
+    <Property Name="username" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+    <Property Name="itemName" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
+    <Property Name="itemType" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+    <Property Name="itemStatus" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+    <Property Name="itemDescription" MaxLength="255" FixedLength="false" Unicode="true" Type="String" />
+    <Property Name="ImageUrl" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+    <Property Name="locationName" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
+    <Property Name="date" Precision="0" Type="DateTime" />
+    <Property Name="reportStatus" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+    <Property Name="returnMethod" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
+    <Property Name="reportID" Type="Int32" />
+    <Property Name="userIDNum" MaxLength="8" FixedLength="false" Unicode="true" Type="String" />
+    <Property Name="messageNotif" MaxLength="255" FixedLength="false" Unicode="true" Type="String" />
+    <Property Name="dateReceive" Precision="3" Type="DateTime" />
+  </EntityType>
+  <EntityType Name="vw_UserRole">
+    <Key>
+      <PropertyRef Name="roleID" />
+      <PropertyRef Name="username" />
+      <PropertyRef Name="roleName" />
+    </Key>
+    <Property Name="roleID" Nullable="false" Type="Int32" />
+    <Property Name="username" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+    <Property Name="roleName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+  </EntityType>
+  <Association Name="FK__UserInfo__depart__5441852A">
+    <End Type="Self.Department" Multiplicity="0..1" Role="Department">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="Self.UserInfo" Multiplicity="*" Role="UserInfo" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="departmentID" />
+      </Principal>
+      <Dependent Role="UserInfo">
+        <PropertyRef Name="departmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserAccount_UserRole">
+    <End Type="Self.UserRole" Multiplicity="0..1" Role="UserRole" />
+    <End Type="Self.UserAccount" Multiplicity="*" Role="UserAccount" />
+    <ReferentialConstraint>
+      <Principal Role="UserRole">
+        <PropertyRef Name="roleID" />
+      </Principal>
+      <Dependent Role="UserAccount">
+        <PropertyRef Name="roleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SeekSafeEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Department" EntityType="Self.Department" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="UserAccount" EntityType="Self.UserAccount" />
+    <EntitySet Name="UserInfo" EntityType="Self.UserInfo" />
+    <EntitySet Name="UserRole" EntityType="Self.UserRole" />
+    <EntitySet Name="vw_AllReports" EntityType="Self.vw_AllReports" />
+    <EntitySet Name="vw_UserRole" EntityType="Self.vw_UserRole" />
+    <AssociationSet Name="FK__UserInfo__depart__5441852A" Association="Self.FK__UserInfo__depart__5441852A">
+      <End EntitySet="Department" Role="Department" />
+      <End EntitySet="UserInfo" Role="UserInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserAccount_UserRole" Association="Self.FK_UserAccount_UserRole">
+      <End EntitySet="UserRole" Role="UserRole" />
+      <End EntitySet="UserAccount" Role="UserAccount" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_ApproveItem">
+      <Parameter Name="itemID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_ClaimedItem">
+      <Parameter Name="itemID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_DeleteAccount">
+      <Parameter Name="userID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_DeletePendingReports">
+      <Parameter Name="itemID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="sp_FoundItem">
+      <Parameter Name="itemID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_Verified">
+      <Parameter Name="itemID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="Item" EntityType="SeekSafeModel.Item" />
+    <EntitySet Name="vw_VerifiedItems" EntityType="SeekSafeModel.vw_VerifiedItems" />
+    <EntitySet Name="vw_PendingRequest" EntityType="SeekSafeModel.vw_PendingRequest" />
+    <EntitySet Name="vw_ToClaimingRequest" EntityType="SeekSafeModel.vw_ToClaimingRequest" />
+    <EntitySet Name="vw_ClaimedReports" EntityType="SeekSafeModel.vw_ClaimedReports" />
+  </EntityContainer>
+  <EntityType Name="Item">
+    <Key>
+      <PropertyRef Name="itemID" />
+    </Key>
+    <Property Name="itemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userIDNum" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+    <Property Name="itemName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="itemType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="itemStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="itemDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="locationName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="date" Type="DateTime" Precision="0" />
+    <Property Name="time" Type="Time" Precision="7" />
+    <Property Name="returnMethod" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="reportID" Type="Int32" />
+    <Property Name="reportStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="messageNotif" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="dateReceive" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="vw_VerifiedItems">
+    <Key>
+      <PropertyRef Name="itemID" />
+      <PropertyRef Name="itemType" />
+    </Key>
+    <Property Name="itemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userIDNum" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+    <Property Name="itemName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="itemType" Type="String" Nullable="false" MaxLength="19" FixedLength="false" Unicode="false" />
+    <Property Name="itemDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="locationName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="date" Type="DateTime" Precision="0" />
+    <Property Name="time" Type="Time" Precision="7" />
+  </EntityType>
+  <EntityType Name="vw_PendingRequest">
+    <Key>
+      <PropertyRef Name="itemID" />
+      <PropertyRef Name="itemType" />
+    </Key>
+    <Property Name="itemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userIDNum" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+    <Property Name="itemName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="itemType" Type="String" Nullable="false" MaxLength="19" FixedLength="false" Unicode="false" />
+    <Property Name="itemDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="locationName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="date" Type="DateTime" Precision="0" />
+    <Property Name="time" Type="Time" Precision="7" />
+  </EntityType>
+  <EntityType Name="vw_ToClaimingRequest">
+    <Key>
+      <PropertyRef Name="itemID" />
+    </Key>
+    <Property Name="itemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userIDNum" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+    <Property Name="itemName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="itemType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="itemDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="locationName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="date" Type="DateTime" Precision="0" />
+    <Property Name="time" Type="Time" Precision="7" />
+  </EntityType>
+  <EntityType Name="vw_ClaimedReports">
+    <Key>
+      <PropertyRef Name="itemID" />
+    </Key>
+    <Property Name="itemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userIDNum" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+    <Property Name="itemName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="itemType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="itemDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="locationName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="date" Type="DateTime" Precision="0" />
+    <Property Name="time" Type="Time" Precision="7" />
+  </EntityType>
+</Schema>

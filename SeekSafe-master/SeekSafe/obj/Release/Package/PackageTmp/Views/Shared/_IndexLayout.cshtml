@@ -1,0 +1,204 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- Title and Custom CSS -->
+    <title>@ViewBag.Title - SeekSafe</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+
+    <!-- Modernizr JavaScript -->
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+
+    <style>
+        body {
+            margin-top: 0;
+            padding-top: 0px;
+            padding-bottom: 0px;
+        }
+
+        .bg-light1 {
+            background: rgba(0, 0, 255, 0.1) !important;
+        }
+
+        .custom-bg-color {
+            background-image: linear-gradient(135deg, #6B0F1A 100%, #6B0F1A 10%);
+        }
+            
+
+        h1 {
+            color: black;
+        }
+
+        p {
+            color: black;
+        }
+
+        .dropdown-menu[data-bs-popper]
+        {
+           left: auto;
+        }
+
+        .report-form-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 255, 0.3);
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #052659;
+            border-radius: 5px;
+            background-color: transparent;
+            color: #000000;
+        }
+
+        /* Login button */
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background-color: #7DA0CA;
+            color: #021024;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+            input[type="submit"]:hover {
+                background-color: #C1E8FF;
+                color: #021024;
+            }
+
+        .form-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 255, 0.3);
+        }
+
+            /* Form Fields */
+            .form-container label {
+                display: block;
+                margin-bottom: 20px;
+            }
+
+            .form-container textarea {
+                width: 100%;
+                padding: 8px;
+                border: 1px solid #CCCCCC;
+                border-radius: 4px;
+                resize: vertical;
+            }
+
+            .form-container input[type="radio"] {
+                margin-right: 10px;
+            }
+
+            .form-container button[type="submit"] {
+                background-color: #004080;
+                color: #FFFFFF;
+                border: none;
+                border-radius: 4px;
+                padding: 10px 20px;
+                cursor: pointer;
+            }
+
+            .form-container textarea:focus {
+                border-color: #004080;
+            }
+
+            .form-container input[type="radio"]:focus {
+                outline-color: #004080;
+            }
+
+            .form-container button[type="submit"]:focus {
+                outline-color: #004080;
+            }
+
+        .btn-primary {
+            color: #fff;
+            background-color: #FFA500;
+            border-color: #FFA500;
+        }
+
+        .btn-secondary {
+            color: #fff;
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+        }
+
+        .dropdown-toggle {
+            color: #fff;
+            background-color: #004080;
+            border-color: #004080;
+        }
+
+        .text-dark {
+            color: #fff !important;
+        }
+
+        .bg-light {
+            background-color: #ff0000 !important;
+        }
+
+        .hero-section{
+            margin-top: 3rem!important;
+            background-image: linear-gradient(135deg, #f5f7fa 10%, #c3cfe2 100%);
+        }
+    </style>
+
+</head>
+
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark custom-bg-color fixed-top">
+        <div class="container-fluid">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a class="navbar-brand" href="#">
+                    <img src="logo.png" alt="Logo" style="width:40px;" class="rounded-pill">
+                </a>    
+                <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a href="~/Home/Index" class="nav-link text-white">Home</a></li>
+                        <li class="nav-item"><a href="~/Home/About" class="nav-link text-white">About</a></li>
+                    </ul>                   
+                </div>
+            </div>
+            
+            <div class="d-flex">
+                @*<form class="d-flex">
+                    <input type="search" class="form-control form-control-dark" placeholder="Find Your Account..." aria-label="Search">
+                </form>*@
+                <a href="~/Home/Login" class="nav-link text-white">Login</a>
+                <a href="~/Home/Register" class="btn btn-warning">Sign-up</a>
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+     </nav>
+
+
+
+        @RenderBody()
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

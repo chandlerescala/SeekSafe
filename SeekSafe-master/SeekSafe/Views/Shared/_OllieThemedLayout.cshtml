@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="SeekSafe: Lost and Found Management System">
+    <meta name="author" content="Bongola MJ, Escala CA, Escala MR, Tepace, JR">
+    <title>SeekSafe</title>
+    <!-- font icons -->
+    <link href="@Url.Content("~/assets/vendors/themify-icons/css/themify-icons.css")" rel="stylesheet" />
+
+    <!-- owl carousel -->
+    <link href="@Url.Content("~/assets/vendors/owl-carousel/css/owl.carousel.css")" rel="stylesheet" />
+
+    <link href="@Url.Content("~/assets/vendors/owl-carousel/css/owl.theme.default.css")" rel="stylesheet" />
+
+    <!-- Bootstrap + Ollie main styles -->
+    <link href="@Url.Content("~/assets/css/ollie.css")" rel="stylesheet" />
+
+</head>
+@{
+    // Resolve the server-relative URL for the image
+    string imageUrl = Url.Content("~/assets/imgs/brand.svg");
+}
+
+<body>
+    <nav id="scrollspy" class="navbar navbar-light bg-light navbar-expand-lg fixed-top" data-spy="affix" data-offset-top="20">
+        <div class="container">
+            <a class="navbar-brand" href="~/Home/Index"><img src="@imageUrl" alt="" class="brand-img"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/Home/Index">Main</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/Home/About">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/Home/Login">Login</a>
+                    </li>     
+                    <li class="nav-item ml-0 ml-lg-4">
+                        <a class="nav-link btn btn-primary" href="~/Home/Register">Sign Up</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header id="home" class="header">
+        <div class="overlay"></div>
+        <div id="header-carousel" class="carousel slide carousel-fade" data-ride="carousel">
+            <div class="container">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h1 class="carousel-title">Welcome to<br> SeekSafe!</h1>
+                            @*<button class="btn btn-primary btn-rounded">Learn More</button>*@
+                            <a href="@Url.Action("About", "Home")" class="btn btn-primary btn-rounded">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="infos container mb-4 mb-md-2">
+            <div class="title">
+                @*<h6 class="subtitle font-weight-normal">Are locking for</h6>*@
+                <h5>SeekSafe</h5>
+                <p class="font-small">Secure your finds, discover peace of mind!</p>
+            </div>
+            <div class="socials text-right">
+                <div class="row justify-content-between">
+                    <div class="col">
+                        @*<a class="d-block subtitle"><i class="ti-microphone pr-2"></i> (123) 456-7890</a>*@
+                        <a class="d-block subtitle">Gmail Account</a>
+                        <a class="d-block subtitle"><i class="ti-email pr-2"></i> seeksafe19@gmail.com</a>
+                    </div>
+                    <div class="col">
+                        <h6 class="subtitle font-weight-normal mb-2">Social Media</h6>
+                        <div class="social-links">
+                            <a href="javascript:void(0)" class="link pr-1"><i class="ti-facebook"></i></a>
+                            <a href="javascript:void(0)" class="link pr-1"><i class="ti-twitter-alt"></i></a>
+                            <a href="javascript:void(0)" class="link pr-1"><i class="ti-google"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div>
+        @RenderBody()
+    </div>
+
+    <div class="container_foot_h">
+        <footer class="footer mt-5 border-top">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-md-6 text-center text-md-left">
+                    <p class="mb-0">
+                        SeekSafe
+                        <script>document.write(new Date().getFullYear())</script> &copy;
+                        <a target="_blank" href="https://www.facebook.com/mark.julianiii">Bongola MJ,</a>
+                        <a target="_blank" href="https://www.facebook.com/chandlerescala"> Escala CA,</a>
+                        <a target="_blank" href="https://www.facebook.com/mistyrhaine.escala/"> Escala MR,</a>
+                        <a target="_blank" href="https://www.facebook.com/jessarosetepace.24"> Tepace JR</a>
+                    </p>
+                </div>
+                <div class="col-md-6 text-center text-md-right">
+                    <div class="social-links">
+                        <a href="javascript:void(0)" class="link"><i class="ti-facebook"></i></a>
+                        <a href="https://google.com/seeksafe19" class="link"><i class="ti-google"></i></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- core  -->
+    <script src="@Url.Content("~/assets/vendors/jquery/jquery-3.4.1.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/bootstrap/bootstrap.bundle.js")"></script>
+
+    <!-- bootstrap 3 affix -->
+    <script src="@Url.Content("~/assets/vendors/bootstrap/bootstrap.affix.js")"></script>
+
+    <!-- Owl carousel  -->
+    <script src="@Url.Content("~/assets/vendors/owl-carousel/js/owl.carousel.js")"></script>
+
+    <!-- Ollie js -->
+    <script src="@Url.Content("~/assets/js/Ollie.js")"></script>
+</body>
+</html>
+
+<style>
+    .container_foot_h {
+        margin-top: 10px;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        padding: 0 20px; /* Adjust left and right padding for centering */
+    }
+</style>

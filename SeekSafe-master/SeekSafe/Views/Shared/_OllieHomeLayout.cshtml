@@ -1,0 +1,337 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="SeekSafe: Lost and Found Management System">
+    <meta name="author" content="Bongola MJ, Escala CA, Escala MR, Tepace, JR">
+    <title>SeekSafe</title>
+    <!-- font icons -->
+    <link href="@Url.Content("~/assets/vendors/themify-icons/css/themify-icons.css")" rel="stylesheet" />
+
+    <!-- owl carousel -->
+    <link href="@Url.Content("~/assets/vendors/owl-carousel/css/owl.carousel.css")" rel="stylesheet" />
+
+    <link href="@Url.Content("~/assets/vendors/owl-carousel/css/owl.theme.default.css")" rel="stylesheet" />
+
+    <!-- Bootstrap + Ollie main styles -->
+    <link href="@Url.Content("~/assets/css/ollie.css")" rel="stylesheet" />
+
+</head>
+@{
+    // Resolve the server-relative URL for the image
+    string imageUrl = Url.Content("~/assets/imgs/brand.svg");
+}
+
+<body>
+    <nav id="scrollspy" class="navbar navbar-light bg-light navbar-expand-lg fixed-top" data-spy="affix" data-offset-top="20">
+        <div class="container">
+            <a class="navbar-brand" href="~/Home/Home">
+                <img src="@imageUrl" alt="" class="brand-img" style="max-width: 100%;">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="~/Home/Home">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="~/Home/MyReports">My Report</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="~/Home/FoundItems">Found Item</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="~/Home/ClaimItems">Claimed Item</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Manage Report
+                                    <span class="badge bg-light text-dark rounded-pill align-text-bottom ms-1">
+                                        @ViewBag.ManageReportCount
+                                    </span>
+
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+
+                                    <a class="dropdown-item" href="~/Home/PendingReports">
+                                        Pending Reports
+                                        <span class="badge bg-light text-dark rounded-pill align-text-bottom ms-1">
+                                            @ViewBag.PendingItemCount
+                                        </span>
+                                    </a>
+
+                                    <a class="dropdown-item" href="~/Home/ClaimingRequest">
+                                        Claiming Request
+                                        <span class="badge bg-light text-dark rounded-pill align-text-bottom ms-1">
+                                            @ViewBag.ClaimingRequest
+                                        </span>
+                                    </a>
+
+                                    <a class="dropdown-item" href="~/Home/VerifiedReports">
+                                        Verified Reports
+                                        <span class="badge bg-light text-dark rounded-pill align-text-bottom ms-1">
+                                            @ViewBag.VerifiedItemCount
+                                        </span>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Manage User
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="~/Home/ManageUsers">User Account</a>
+                                    <a class="dropdown-item" href="~/Home/ManageUserInfo">User Information</a>
+                                </div>
+                            </li>
+                            <li class="nav-item ml-0 ml-lg-4">
+                                <a href="~/Home/MyProfile" class="av-link btn-colorful">@User.Identity.Name</a>
+                            </li>
+
+                        }
+                        else if (User.IsInRole("User"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="~/Home/Home">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="~/Home/MyReports">My Report</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="~/Home/FoundItems">Found Item</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="~/Home/ClaimItems">Claimed Item</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="~/Home/Guide">Guidelines</a>
+                            </li>
+                            <li class="nav-item ml-0 ml-lg-4">
+                                <a href="~/Home/MyProfile" class="av-link btn-colorful">@User.Identity.Name</a>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+            <div class="d-flex align-items-center">
+                @*<a href="~/Home/Notifications" class="nav-link link pr-1">
+                    <i class="ti-bell" style="font-size:30px"></i>
+                    <span class="badge bg-light text-dark rounded-pill align-text-bottom">@ViewBag.Notifications</span>
+                </a>*@
+                <div class="dropdown">
+                    <a href="#" class="nav-link text-info dropdown-toggle" id="dropdownUser1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="~/Content/Placeholder/user.png" alt="profile" width="32" height="32" class="rounded-circle">
+                    </a>
+                    <ul class="dropdown-menu text-small dropdown-menu-end" aria-labelledby="dropdownUser1">
+                        <li class="nav-item">
+                            <a class="dropdown-item" href="~/Home/MyProfile">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="dropdown-item" href="~/Home/MyReports">My Reports</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="dropdown-item" href="~/Home/Guide">Guidelines</a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li class="nav-item">
+                            <a class="dropdown-item" href="~/Home/Logout">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div>
+        @RenderBody()
+    </div>
+
+    <!-- core  -->
+    <script src="@Url.Content("~/assets/vendors/jquery/jquery-3.4.1.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/bootstrap/bootstrap.bundle.js")"></script>
+
+    <!-- bootstrap 3 affix -->
+    <script src="@Url.Content("~/assets/vendors/bootstrap/bootstrap.affix.js")"></script>
+
+    <!-- Owl carousel  -->
+    <script src="@Url.Content("~/assets/vendors/owl-carousel/js/owl.carousel.js")"></script>
+
+    <!-- Ollie js -->
+    <script src="@Url.Content("~/assets/js/Ollie.js")"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
+
+<style>
+    .container_foot {
+        margin-top: 50px;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        padding: 0 20px; /* Adjust left and right padding for centering */
+    }
+
+    .container-fluid_a {
+        width: 100% !important;
+        max-width: 500px !important;
+        margin: 100px auto !important;
+        padding: 20px !important;
+        background-color: #fff !important;
+        border-radius: 8px !important;
+        box-shadow: 0 0 10px rgba(0, 0, 255, 0.3) !important;
+        color: black !important;
+        position: fixed; /* Use fixed positioning to keep the container at the bottom */
+        left: 50%; /* Move container horizontally to center */
+        transform: translateX(-50%); /* Adjust horizontal positioning */
+        bottom: 20px; /* Distance from the bottom of the viewport */
+    }
+
+    .container-fluid_b {
+        width: 100%;
+        max-width: 500px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 255, 0.3);
+        color: black;
+        position: relative; /* Position relative to its normal flow */
+        left: 50%;
+        transform: translateX(-50%);
+        margin-top: 20px; /* Adjust top margin within the header */
+        z-index: 1000;
+    }
+
+    textarea {
+        resize: vertical;
+    }
+
+    .btn {
+        display: inline-block;
+        margin-bottom: 5px;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .back-home {
+        display: inline-block;
+        text-align: left;
+        color: #666;
+        text-decoration: none;
+        margin-right: 290px;
+        margin-left: 5px;
+    }
+
+    .forgot-password {
+        display: flex;
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+        text-align: center;
+        margin-top: 10px;
+        color: #666;
+        text-decoration: none;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 2px solid #6B0F1A;
+        border-radius: 5px;
+        background-color: transparent;
+        color: #000000;
+    }
+
+    input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: none;
+        border-radius: 5px;
+        background-color: #6B0F1A;
+        color: #fff;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+        input[type="submit"]:hover {
+            background-color: #fd5e5e;
+            color: #021024;
+        }
+
+    /* Button styles */
+    .btn-colorful {
+        display: inline-block;
+        width: 100%;
+        padding: 10px 20px;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        border: none;
+        border-radius: 20px;
+        background-color: #008080;
+        color: #fff;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        /* Hover state */
+        .btn-colorful:hover {
+            background-color: #66b2b2;
+            color: #021024; /* Dark text color on hover */
+        }
+    /*Delete*/
+    .btn1 {
+        display: inline-block;
+        margin-bottom: 5px;
+        padding: 10px 20px;
+        background-color: #dd1818;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    /*Edit*/
+    .btn6 {
+        display: inline-block;
+        margin-bottom: 5px;
+        padding: 10px 20px;
+        background-color: #FF8C00;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    /*Details*/
+    .btn3 {
+        display: inline-block;
+        margin-bottom: 5px;
+        padding: 10px 20px;
+        background-color: #fc4a1a;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+</style>

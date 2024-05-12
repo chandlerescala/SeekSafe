@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="91f0c678e76e4322bf16649b9d543211" Name="Diagram1">
+        <EntityTypeShape EntityType="SeekSafeModel.Department" Width="1.5" PointX="0.75" PointY="5.5" />
+        <EntityTypeShape EntityType="SeekSafeModel.Item" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SeekSafeModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="5.75" />
+        <EntityTypeShape EntityType="SeekSafeModel.UserAccount" Width="1.5" PointX="3" PointY="0.875" />
+        <EntityTypeShape EntityType="SeekSafeModel.UserInfo" Width="1.5" PointX="3" PointY="5" />
+        <EntityTypeShape EntityType="SeekSafeModel.UserRole" Width="1.5" PointX="0.75" PointY="1.25" />
+        <EntityTypeShape EntityType="SeekSafeModel.vw_AllReports" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SeekSafeModel.vw_ClaimedReports" Width="1.5" PointX="7.75" PointY="5.75" />
+        <EntityTypeShape EntityType="SeekSafeModel.vw_PendingRequest" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="SeekSafeModel.vw_ToClaimingRequest" Width="1.5" PointX="2.75" PointY="8.75" />
+        <EntityTypeShape EntityType="SeekSafeModel.vw_UserRole" Width="1.5" PointX="4.75" PointY="8.75" />
+        <EntityTypeShape EntityType="SeekSafeModel.vw_VerifiedItems" Width="1.5" PointX="9.75" PointY="0.75" />
+        <AssociationConnector Association="SeekSafeModel.FK__UserInfo__depart__5441852A" />
+        <AssociationConnector Association="SeekSafeModel.FK_UserAccount_UserRole" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

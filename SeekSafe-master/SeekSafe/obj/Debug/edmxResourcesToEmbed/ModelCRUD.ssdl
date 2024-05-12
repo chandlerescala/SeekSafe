@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SeekSafeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="categoryID" />
+    </Key>
+    <Property Name="categoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="categoryName" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="departmentID" />
+    </Key>
+    <Property Name="departmentID" Type="int" Nullable="false" />
+    <Property Name="departmentName" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Item">
+    <Key>
+      <PropertyRef Name="itemID" />
+    </Key>
+    <Property Name="itemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userIDNum" Type="nvarchar" MaxLength="20" />
+    <Property Name="itemName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="itemType" Type="nvarchar" MaxLength="50" />
+    <Property Name="itemStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="itemDescription" Type="nvarchar" MaxLength="255" />
+    <Property Name="locationFound" Type="int" />
+    <Property Name="dateFound" Type="datetime" />
+    <Property Name="ImageURL" Type="nvarchar" MaxLength="255" />
+    <Property Name="locationName" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="ItemLocation">
+    <Key>
+      <PropertyRef Name="locationID" />
+    </Key>
+    <Property Name="locationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="locationName" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Notification_Message">
+    <Key>
+      <PropertyRef Name="notificationID" />
+    </Key>
+    <Property Name="notificationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userIDNum" Type="nvarchar" MaxLength="20" />
+    <Property Name="messageNotif" Type="nvarchar" MaxLength="255" />
+    <Property Name="dateReceive" Type="date" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Tag">
+    <Key>
+      <PropertyRef Name="tagID" />
+    </Key>
+    <Property Name="tagID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tagName" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="TransactionHistory">
+    <Key>
+      <PropertyRef Name="transactionID" />
+    </Key>
+    <Property Name="transactionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userIDNum" Type="nvarchar" MaxLength="20" />
+    <Property Name="otherUserIDNum" Type="nvarchar" MaxLength="20" />
+    <Property Name="itemID" Type="int" />
+    <Property Name="transactionDate" Type="date" />
+    <Property Name="transactionType" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="UserAccount">
+    <Key>
+      <PropertyRef Name="userID" />
+    </Key>
+    <Property Name="userID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userIDNum" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="roleID" Type="int" />
+  </EntityType>
+  <EntityType Name="UserInfo">
+    <Key>
+      <PropertyRef Name="userID" />
+    </Key>
+    <Property Name="userID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userIDNum" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="firstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="lastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="departmentID" Type="int" />
+    <Property Name="contactNo" Type="nvarchar" MaxLength="20" />
+    <Property Name="email" Type="nvarchar" MaxLength="100" />
+    <Property Name="registrationDate" Type="date" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="roleID" />
+    </Key>
+    <Property Name="roleID" Type="int" Nullable="false" />
+    <Property Name="roleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'SeekSafe.dbo.vw_LostItem' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_LostItem">
+    <Key>
+      <PropertyRef Name="itemID" />
+      <PropertyRef Name="itemName" />
+    </Key>
+    <Property Name="itemID" Type="int" Nullable="false" />
+    <Property Name="userIDNum" Type="nvarchar" MaxLength="20" />
+    <Property Name="itemName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="itemType" Type="nvarchar" MaxLength="50" />
+    <Property Name="itemStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="itemDescription" Type="nvarchar" MaxLength="255" />
+    <Property Name="locationFound" Type="nvarchar" MaxLength="100" />
+    <Property Name="dateFound" Type="date" />
+    <Property Name="ImageURL" Type="nvarchar" MaxLength="255" />
+    <Property Name="username" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'SeekSafe.dbo.vw_UserRole' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_UserRole">
+    <Key>
+      <PropertyRef Name="roleID" />
+      <PropertyRef Name="username" />
+      <PropertyRef Name="roleName" />
+    </Key>
+    <Property Name="roleID" Type="int" Nullable="false" />
+    <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="roleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Item__locationFo__59FA5E80">
+    <End Role="ItemLocation" Type="Self.ItemLocation" Multiplicity="0..1" />
+    <End Role="Item" Type="Self.Item" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ItemLocation">
+        <PropertyRef Name="locationID" />
+      </Principal>
+      <Dependent Role="Item">
+        <PropertyRef Name="locationFound" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'FK__Item__userIDNum__59063A47' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__Item__userIDNum__59063A47" />-->
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'FK__Notificat__userI__619B8048' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__Notificat__userI__619B8048" />-->
+  <Association Name="FK__Transacti__itemI__5EBF139D">
+    <End Role="Item" Type="Self.Item" Multiplicity="0..1" />
+    <End Role="TransactionHistory" Type="Self.TransactionHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Item">
+        <PropertyRef Name="itemID" />
+      </Principal>
+      <Dependent Role="TransactionHistory">
+        <PropertyRef Name="itemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'FK__Transacti__other__5DCAEF64' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__Transacti__other__5DCAEF64" />-->
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'FK__Transacti__userI__5CD6CB2B' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__Transacti__userI__5CD6CB2B" />-->
+  <Association Name="FK__UserAccou__roleI__4F7CD00D">
+    <End Role="UserRole" Type="Self.UserRole" Multiplicity="0..1" />
+    <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserRole">
+        <PropertyRef Name="roleID" />
+      </Principal>
+      <Dependent Role="UserAccount">
+        <PropertyRef Name="roleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserInfo__depart__5441852A">
+    <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="departmentID" />
+      </Principal>
+      <Dependent Role="UserInfo">
+        <PropertyRef Name="departmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserInfo__userID__534D60F1">
+    <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="1" />
+    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="UserAccount">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="UserInfo">
+        <PropertyRef Name="userID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserInfo_UserAccount">
+    <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="1" />
+    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="UserAccount">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="UserInfo">
+        <PropertyRef Name="userID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="SeekSafeModelStoreContainer">
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Item" EntityType="Self.Item" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ItemLocation" EntityType="Self.ItemLocation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Notification_Message" EntityType="Self.Notification_Message" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TransactionHistory" EntityType="Self.TransactionHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserAccount" EntityType="Self.UserAccount" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="vw_LostItem" EntityType="Self.vw_LostItem" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_LostItem].[itemID] AS [itemID], 
+    [vw_LostItem].[userIDNum] AS [userIDNum], 
+    [vw_LostItem].[itemName] AS [itemName], 
+    [vw_LostItem].[itemType] AS [itemType], 
+    [vw_LostItem].[itemStatus] AS [itemStatus], 
+    [vw_LostItem].[itemDescription] AS [itemDescription], 
+    [vw_LostItem].[locationFound] AS [locationFound], 
+    [vw_LostItem].[dateFound] AS [dateFound], 
+    [vw_LostItem].[ImageURL] AS [ImageURL], 
+    [vw_LostItem].[username] AS [username]
+    FROM [dbo].[vw_LostItem] AS [vw_LostItem]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_UserRole" EntityType="Self.vw_UserRole" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_UserRole].[roleID] AS [roleID], 
+    [vw_UserRole].[username] AS [username], 
+    [vw_UserRole].[roleName] AS [roleName]
+    FROM [dbo].[vw_UserRole] AS [vw_UserRole]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__Item__locationFo__59FA5E80" Association="Self.FK__Item__locationFo__59FA5E80">
+      <End Role="ItemLocation" EntitySet="ItemLocation" />
+      <End Role="Item" EntitySet="Item" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Transacti__itemI__5EBF139D" Association="Self.FK__Transacti__itemI__5EBF139D">
+      <End Role="Item" EntitySet="Item" />
+      <End Role="TransactionHistory" EntitySet="TransactionHistory" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserAccou__roleI__4F7CD00D" Association="Self.FK__UserAccou__roleI__4F7CD00D">
+      <End Role="UserRole" EntitySet="UserRole" />
+      <End Role="UserAccount" EntitySet="UserAccount" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserInfo__depart__5441852A" Association="Self.FK__UserInfo__depart__5441852A">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="UserInfo" EntitySet="UserInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserInfo__userID__534D60F1" Association="Self.FK__UserInfo__userID__534D60F1">
+      <End Role="UserAccount" EntitySet="UserAccount" />
+      <End Role="UserInfo" EntitySet="UserInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserInfo_UserAccount" Association="Self.FK_UserInfo_UserAccount">
+      <End Role="UserAccount" EntitySet="UserAccount" />
+      <End Role="UserInfo" EntitySet="UserInfo" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
